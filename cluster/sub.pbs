@@ -1,0 +1,15 @@
+#!/bin/bash
+#PBS -l select=1:ncpus=1:mem=2GB
+#PBS -l walltime=00:01:00
+#PBS -q short_cpuQ
+#PBS -o sub.out
+#PBS -e sub.err
+#PBS -M francesco.musso@studenti.unitn.it
+#PBS -m be
+
+# From the /home in the compute node we move to the
+# directory from which we launched the job
+cd $PBS_O_WORKDIR
+
+JOB_ID=$(qsub -J 1-28 mc.pbs)
+qsub -W depend=afternotok:$JOB_ID sub.pbs

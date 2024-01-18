@@ -1,0 +1,15 @@
+#!/bin/bash
+#PBS -l select=1:ncpus=64:mem=32GB
+#PBS -l walltime=06:00:00
+#PBS -q short_cpuQ
+#PBS -o mc.out
+#PBS -e mc.err
+##PBS -M francesco.musso@studenti.unitn.it
+##PBS -m be
+
+# From the /home in the compute node we move to the
+# directory from which we launched the job
+cd $PBS_O_WORKDIR
+
+source .venv/bin/activate
+time python3 mc.py

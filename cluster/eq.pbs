@@ -1,0 +1,17 @@
+#!/bin/bash
+#PBS -l select=1:ncpus=96:mem=32GB:host=hpc-c11-node06
+#PBS -l walltime=06:00:00
+#PBS -q mp_short_cpuQ
+#PBS -o eq.out
+#PBS -e eq.err
+##PBS -M francesco.musso@studenti.unitn.it
+##PBS -m be
+
+# From the /home in the compute node we move to the
+# directory from which we launched the job
+cd $PBS_O_WORKDIR
+
+qsub -W depend=afternotok:$PBS_JOBID eq.pbs
+
+source .venv/bin/activate
+time python3 eq.py
